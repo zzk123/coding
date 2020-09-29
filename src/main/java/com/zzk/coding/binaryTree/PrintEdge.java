@@ -24,6 +24,10 @@ public class PrintEdge {
         }
     }
 
+    /**
+     * 标准1输出
+     * @param head
+     */
     public void printEdge1(Node head){
         if(head == null){
             return;
@@ -50,7 +54,7 @@ public class PrintEdge {
         if(h == null){
             return l;
         }
-        return Math.max(getHeight(h.left, l + 1), getHeight(h.right, l + 1);
+        return Math.max(getHeight(h.left, l + 1), getHeight(h.right, l + 1));
     }
 
     public void setEdgeMap(Node h, int l, Node[][] edgeMap){
@@ -73,4 +77,44 @@ public class PrintEdge {
         printLeafNotInMap(h.left, l+1, m);
         printLeafNotInMap(h.right, l+1, m);
     }
+
+
+    /**
+     * 标准2输出
+     * @param head
+     */
+     public void printEdge2(Node head){
+        if(head == null){
+            return;
+        }
+        System.out.println(head.value + " ");
+        if(head.left != null && head.right != null){
+            printLeftEdge(head.left, true);
+            printRightEdge(head.right, true);
+        }else{
+            printEdge2(head.left != null ? head.left : head.right);
+        }
+     }
+
+     public void printLeftEdge(Node h, boolean print){
+         if(h == null){
+             return;
+         }
+         if(print || (h.left == null && h.right == null)){
+             System.out.println(h.value + " ");
+         }
+         printLeftEdge(h.left, print);
+         printLeftEdge(h.right, print && h.left == null ? true : false);
+     }
+
+     public void printRightEdge(Node h, boolean print){
+         if(h == null){
+             return;
+         }
+         printRightEdge(h.left, print && h.right == null ? true : false);
+         printRightEdge(h.right, print);
+         if(print || (h.left == null && h.right == null)){
+             System.out.println(h.value + " ");
+         }
+     }
 }
