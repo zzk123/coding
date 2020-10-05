@@ -29,6 +29,7 @@ public class PrintByZigZag {
 
     /**
      * 按ZigZag打印
+     * 使用last，nlast标记每层的最后一个节点
      * @param head
      */
     public void printByZigZag(Node head){
