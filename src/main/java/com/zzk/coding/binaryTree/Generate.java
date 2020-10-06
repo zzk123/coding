@@ -20,6 +20,11 @@ public class Generate {
         }
     }
 
+    /**
+     * 数组迭代生成节点，最中间的数生成头节点，左边的数生成左子树，右边的数生成右子树
+     * @param sortArr
+     * @return
+     */
     public Node generateTree(int[] sortArr){
         if(sortArr == null){
             return null;
@@ -27,6 +32,13 @@ public class Generate {
         return generate(sortArr, 0, sortArr.length - 1);
     }
 
+    /**
+     * 迭代数组生成节点
+     * @param sortArr
+     * @param start
+     * @param end
+     * @return
+     */
     public Node generate(int[] sortArr, int start, int end){
         if(start > end){
             return null;
