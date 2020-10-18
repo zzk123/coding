@@ -52,7 +52,7 @@ public class GetCurencyNum {
         if(arr == null || arr.length == 0 || aim < 0){
             return 0;
         }
-        int[][] map = new int[arr.length + 1][aim + 1];
+        int[][] map = new int[arr.length + 1][aim + 1]; 
         int result = process2(arr, 0, aim, map);
         logger.info(new Gson().toJson(map));
         return result;
