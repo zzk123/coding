@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 /**
  * @program: coding
- * @description:
+ * @description: 10.字符串的交错组成
  * @author: zzk
  * @create: 2020-10-27 23:21
  */
