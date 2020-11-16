@@ -28,6 +28,12 @@ public class Rotate {
         }
     }
 
+    /**
+     * 字符串组逆序
+     * @param chas
+     * @param start
+     * @param end
+     */
     public void reverse(char[] chas, int start, int end){
         char tmp = 0;
         while(start < end){
@@ -39,6 +45,11 @@ public class Rotate {
         }
     }
 
+    /**
+     * 方法1
+     * @param chas
+     * @param size
+     */
     public void rotate1(char[] chas, int size){
         if(chas == null || size <= 0 || size >= chas.length){
             return;
@@ -48,6 +59,11 @@ public class Rotate {
         reverse(chas, 0, chas.length - 1);
     }
 
+    /**
+     * 方法2
+     * @param chas
+     * @param size
+     */
     public void rotate2(char[] chas, int size){
         if(chas == null || size < 0 || size >= chas.length){
             return;
