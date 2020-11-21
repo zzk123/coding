@@ -1,14 +1,16 @@
 package com.zzk.coding.str;
 
+import com.google.gson.Gson;
+
 /**
  * @ClassName GetPalindrome
- * @Description TODO
+ * @Description 13.添加最少字符使字符串整体都是回文字符串
  * @Author zzk
  * @Date 2020/11/17 22:32
  **/
 public class GetPalindrome {
 
-    public int[][] getDP(char[] str){
+    public static int[][] getDP(char[] str){
         int[][] dp = new int[str.length][str.length];
         for(int j = 1; j < str.length; j++){
             dp[j-1][j] = str[j-1] == str[j] ? 0 : 1;
@@ -20,10 +22,11 @@ public class GetPalindrome {
                 }
             }
         }
+        System.out.println(new Gson().toJson(dp));
         return dp;
     }
 
-    public String getPalindrome1(String str){
+    public static String getPalindrome1(String str){
         if(str == null || str.length() < 2){
             return str;
         }
@@ -49,7 +52,7 @@ public class GetPalindrome {
         return String.valueOf(res);
     }
 
-    public String getPalindrome2(String str, String strlps){
+    public static String getPalindrome2(String str, String strlps){
         if(str == null || str.equals("")){
             return "";
         }
@@ -84,7 +87,7 @@ public class GetPalindrome {
         return String.valueOf(res);
     }
 
-    public void set(char[] res, int resl, int resr, char[] chas, int ls, int le, int rs, int re){
+    public static void set(char[] res, int resl, int resr, char[] chas, int ls, int le, int rs, int re){
         for(int i = ls; i < le; i++){
             res[resl++] = chas[i];
             res[resr--] = chas[i];
@@ -93,5 +96,10 @@ public class GetPalindrome {
             res[resl++] = chas[i];
             res[resr--] = chas[i];
         }
+    }
+
+    public static void main(String[] args) {
+        String str = "ABC";
+        getPalindrome1(str);
     }
 }
