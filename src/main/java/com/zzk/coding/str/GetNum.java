@@ -8,6 +8,14 @@ package com.zzk.coding.str;
  **/
 public class GetNum {
 
+    /**
+     * 时间复杂度为O(2^N)的递归方法
+     *  i < N 时，p(i) = p(i+1) + p(i+2)
+     *  i = N - 1 时，p(i) = 2
+     *  i = N 时，p(i) = 1
+     * @param n
+     * @return
+     */
     public int getNum1(int n){
         if(n < 1){
             return 0;
@@ -25,6 +33,13 @@ public class GetNum {
         return process(i+1, n) + process(i+2, n);
     }
 
+    /**
+     * 时间复杂度为O(N)，空间复杂度为O(1)
+     * 根据getNum1方法可以得出，当N为1,2,3,4,5,6,7,8时，结算的结果为1,2,3,5,8,13,21,34
+     * 可以看出是一个形如斐波那契数列的结果
+     * @param n
+     * @return
+     */
     public int getNum2(int n){
         if(n < 1){
             return 0;
@@ -44,6 +59,12 @@ public class GetNum {
     }
 
 
+    /**
+     * 用矩阵乘法的办法求解斐波那契数列
+     * 时间复杂度为O(logN)
+     * @param n
+     * @return
+     */
     public int getNum3(int n){
         if(n < 1){
             return 0;
