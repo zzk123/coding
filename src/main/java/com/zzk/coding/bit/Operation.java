@@ -14,9 +14,9 @@ public class Operation {
      * @param b
      * @return
      */
-    public int add(int a, int b){
+    public static int add(int a, int b){
         int sum = a;
-        while(b != 0){
+        while(b != 0){ //进位为0，表示成功，不然需要循环相加进位
             sum = a ^ b;
             b = (a & b) << 1;
             a = sum;
@@ -24,17 +24,24 @@ public class Operation {
         return sum;
     }
 
-    public int negNum(int n){
+    /**
+     * 获取一个数的相反数，也就是负数
+     * 二进制数表达取反加1（补码）
+     * @param n
+     * @return
+     */
+    public static int negNum(int n){
         return add(~n, 1);
     }
 
     /**
      * 减法
+     * a-b = a+(-b)
      * @param a
      * @param b
      * @return
      */
-    public int minus(int a, int b){
+    public static int minus(int a, int b){
         return add(a, negNum(b));
     }
 
@@ -44,7 +51,7 @@ public class Operation {
      * @param b
      * @return
      */
-    public int multi(int a, int b){
+    public static int multi(int a, int b){
         int res = 0;
         while(b != 0){
             if((b & 1) != 0){
@@ -56,12 +63,12 @@ public class Operation {
         return res;
     }
 
-    public boolean isNeg(int n){
+    public static boolean isNeg(int n){
         return n < 0;
     }
 
 
-    public int div(int a, int b){
+    public static int div(int a, int b){
         int x = isNeg(a) ? negNum(a) : a;
         int y = isNeg(b) ? negNum(b) : b;
         int res = 0;
@@ -81,7 +88,7 @@ public class Operation {
      * @param b
      * @return
      */
-    public int divide(int a, int b){
+    public static int divide(int a, int b){
         if(b == 0){
             throw new RuntimeException("divisor is 0");
         }
@@ -95,6 +102,12 @@ public class Operation {
         }else{
             return div(a, b);
         }
+    }
+
+    public static void main(String[] args) {
+        int a = 100;
+        int b = 200;
+        add(a, b);
     }
 }
 
