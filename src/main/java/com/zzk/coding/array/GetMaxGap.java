@@ -8,6 +8,11 @@ package com.zzk.coding.array;
  **/
 public class GetMaxGap {
 
+    /**
+     * 时间复杂度为O(N)，空间复杂度为O(N)
+     * @param nums
+     * @return
+     */
     public int maxGap(int[] nums){
         if(nums == null || nums.length < 2){
             return 0;
@@ -36,7 +41,7 @@ public class GetMaxGap {
         int lastMax = 0;
         int i = 0;
         while(i <= len){
-            if(hasNum[i++]){
+            if(hasNum[i++]){ //找到第一个不为空的桶
                 lastMax = maxs[i-1];
                 break;
             }
@@ -50,6 +55,15 @@ public class GetMaxGap {
         return res;
      }
 
+    /**
+     * 找出num在那个桶区间
+     * (num-min)*len/(max-min)
+     * @param num
+     * @param len
+     * @param min
+     * @param max
+     * @return
+     */
     public int bucket(long num, long len, long min, long max){
         return (int) ((num - min) * len / (max - min));
     }
