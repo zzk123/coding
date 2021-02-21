@@ -1,5 +1,35 @@
 # 其他题目
 ## 1.从5随机到7及其扩展
+### 题目
+  给定一个等概率随机产生 1 ~ 5 的随机函数rand1To5如下：
+   
+  public int rand1To5(){
+    return (int) (Math.random() * 5) + 1;
+  }
+  
+  除此之外，不能使用任何额外的随机机制，请用rand1To5实现等概率随机产生 1 ~ 7 的随机函数 rand1To7
+
+### 补充题目
+   给定一个以p概率产生0，以1-p概率产生1的随机函数rand01p如下：
+   
+   public int rand01p(){
+        // 可随意改变p
+        double p = 0.83;
+        return Math.random() < p ? 0 : 1;
+   }
+   
+   除此之外，不能使用任何额外的额随机机制，请用rand01p实现等概率随机产生1~6的随机函数rand1To6
+
+### 进阶题目
+   给定一个等概率随机产生1~M的随机函数rand1ToM如下：
+   
+   public int rand1ToM(int m){
+        return (int) (Math.random() * m) + 1;
+   }
+    
+   除此之外，不能使用任何额外的随机机制，有两个输入参数，分别为m和n，请用rand1ToM(m)实现等概率随机产生
+1~n 的随机函数rand1ToN
+    
 ## 2.一行代码求两个数的最大公约数
 ## 3.有关阶乘的两个问题
 ## 4.判断一个点是否在矩阵内部

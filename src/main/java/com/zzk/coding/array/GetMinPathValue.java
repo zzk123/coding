@@ -5,7 +5,7 @@ import java.util.Queue;
 
 /**
  * @ClassName GetMinPathValue
- * @Description TODO
+ * @Description 24.求最短通路值
  * @Author zzk
  * @Date 2021/2/6 16:31
  **/

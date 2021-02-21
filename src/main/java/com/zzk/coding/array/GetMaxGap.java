@@ -2,7 +2,7 @@ package com.zzk.coding.array;
 
 /**
  * @ClassName GetMaxGap
- * @Description TODO
+ * @Description 26.数组排序之后相邻数的最大差值
  * @Author zzk
  * @Date 2021/2/6 16:55
  **/
