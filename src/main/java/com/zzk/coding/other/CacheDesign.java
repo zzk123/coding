@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * @ClassName CacheDesign
- * @Description TODO
+ * @Description 10.设计可以变更的缓存结构
  * @Author zzk
  * @Date 2021/3/8 23:43
  **/

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * @ClassName PoolDesign
- * @Description TODO
+ * @Description 11.设计RandomPool结构
  * @Author zzk
  * @Date 2021/3/9 0:06
  **/
@@ -24,6 +24,10 @@ public class PoolDesign {
             this.size = 0;
         }
 
+        /**
+         * 将某个key加入到该结构，做到不重复插入
+         * @param key
+         */
         public void insert(K key){
             if(!this.keyIndexMap.containsKey(key)){
                 this.keyIndexMap.put(key, this.size);
@@ -31,6 +35,10 @@ public class PoolDesign {
             }
         }
 
+        /**
+         * 将原本在结构中的某个key移除
+         * @param key
+         */
         public void delete(K key){
             if(this.keyIndexMap.containsKey(key)){
                 int deleteIndex = this.keyIndexMap.get(key);
@@ -43,6 +51,10 @@ public class PoolDesign {
             }
         }
 
+        /**
+         * 等概率获取一个index
+         * @return
+         */
         public K getRandom(){
             if(this.size == 0){
                 return null;
