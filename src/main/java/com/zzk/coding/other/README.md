@@ -308,9 +308,98 @@ arr1=[1,2,3], arr2=[3,4,5,6],k=4
 如果arr1的长度为N，arr2的长度为M，时间复杂度请达到 O(log(min{M, N}))，额外空间复杂度为O(1)
 
 ## 28.两个有序数组间相加和的TOP K问题
-## 29.出现次数的TOP K问题
-## 30.Manacher算法
+### 题目
+给定两个有序数组arr1和arr2，在给定一个整数k，返回来自arr1和arr2的两个数相加和最大的前k个，两个数必须分别来自两个数组
 
+### 举例
+arr1=[1,2,3,4,5], arr2=[3,5,7,9,11],k=4
+返回数组[16,15,14,14]
+
+###要求
+时间复杂度为O(klogk)
+
+## 29.出现次数的TOP K问题
+### 题目
+给定String 类型的数组strArr，再给定整数k，请严格按照排名顺序打印出现次数前k名的字符串
+
+### 举例
+strArr=["1","2","3","4"], k=2
+No.1:1,times:1
+No.2:2,times:1
+
+这种情况下，所有的字符串都出现一样多，随便打印任何两个字符串都可以
+strArr=["1","1","2","3"], k=2
+输出：
+No.1:1,times:1
+No.2:2,times:1
+
+或者输出：
+No.1:1,times:2
+No.2:3,times:1
+
+### 要求
+如果strArr长度为N，时间复杂度请达到O(Nlogk)
+
+### 进阶题目
+设计并实现TopRecord结构，可以不断地向其中加入字符串，并且可以根据字符串出现的情况随时打印加入次数最多前k个字符串，
+具体为:
+1. k在TopKRecord实例生成时指定，并且不再变化（k是构造函数的参数）
+2. 含有add(String str)方法，即向TopKRecord中加入字符串
+3. 含有printTopK()方法，即打印加入次数最多的前k个字符串，打印有哪些字符串和对应的次数即可，不要求严格按排名顺序打印
+
+#### 进阶
+ TopKRecord record = new TopKRecord(2); //打印top2的结构
+ record.add("A");
+ record.printTopK();
+此时打印：
+ TOP：
+ Str: A Times: 1
+ 
+  record.add("B");
+  record.add("B");
+  record.printTopK();
+此时打印：
+  TOP：
+  Str: A Times: 1
+  Str: B Times: 2
+或者打印
+  TOP：
+  Str: B Times: 2
+  Str: A Times: 1
+  
+  record.add("C");
+  record.add("C");
+  record.printTopK();
+此时打印：
+  TOP：
+  Str: B Times: 2
+  Str: C Times: 2
+或者打印
+  TOP：
+  Str: C Times: 2
+  Str: B Times: 2    
+
+### 要求
+1. 在任何时刻，add方法的时间复杂度不超过O(logk)
+2. 在任何时刻，printTopK方法的时间复杂度不超过O(k)
+
+## 30.Manacher算法
+### 题目
+给定一个字符串str,返回str中最长回文子串的长度
+
+### 举例
+str="123",其中的最长回文子串为"1","2"或"3"，所以返回1
+str="abc1234321ab",其中的最长回文子串为"1234321"，所以返回7
+
+### 进阶题目
+给定一个字符串str，想通过添加字符串的方式使得str整体都变成回文字符串，但要求只能在str的末尾添加字符，请返回在str后面添加的最短字符串
+
+### 举例
+str="12".在末尾添加"1"之后，str变成"121"，是回文串。在末尾添加"21之后，str变为"1221"，也是回文串。但"1"是所有
+方案中最短的，所以返回"1"
+
+### 要求
+如果str的长度为N，解决原文件和进阶问题的时间复杂度都达到O(N)
 
 ## 31.KMP算法
 ### 题目
