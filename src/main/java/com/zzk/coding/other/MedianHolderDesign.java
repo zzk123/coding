@@ -16,8 +16,9 @@ public class MedianHolderDesign {
         private HeapDesign.MyHeap<Integer> maxHeap;
 
         public MedianHolder(){
-            this.maxHeap = new HeapDesign.MyHeap<>(new MaxHeapComparator());
-            this.minHeap = new HeapDesign.MyHeap<>(new MinHeapComparator());
+            HeapDesign heapDesign = new HeapDesign();
+            this.maxHeap = heapDesign.new MyHeap<>(new MaxHeapComparator());
+            this.minHeap = heapDesign.new MyHeap<>(new MinHeapComparator());
         }
 
         public void addNumber(Integer num){

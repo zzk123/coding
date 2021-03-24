@@ -51,8 +51,8 @@ public class MessageBoxDesign {
             tailMap.put(num, cur);
 
             System.out.println("num:" + num);
-            System.out.println("headMap:" + headMap);
-            System.out.println("tailMap:" + tailMap);
+            System.out.println("之前：headMap:" + headMap);
+            System.out.println("之前：tailMap:" + tailMap);
 
             if(tailMap.containsKey(num - 1)){
                 tailMap.get(num - 1).next = cur;
@@ -64,6 +64,10 @@ public class MessageBoxDesign {
                 tailMap.remove(num);
                 headMap.remove(num + 1);
             }
+
+            System.out.println("之后：headMap:" + headMap);
+            System.out.println("之后：tailMap:" + tailMap);
+
             if(headMap.containsKey(lastPrint + 1)){
                 System.out.println("开始输出：");
                 print();
@@ -84,7 +88,7 @@ public class MessageBoxDesign {
     }
 
     public static void main(String[] args) {
-        int[] ints  = {2,1,4,5,7,3,9,8,6};
+        int[] ints  = {2,1,4,5,7,6,3,9,8,6};
         MessageBox messageBox = new MessageBox();
         for(int i : ints) {
             messageBox.receive(i);

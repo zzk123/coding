@@ -21,7 +21,7 @@ public class HeapDesign {
         }
     }
 
-    public static class MyHeap<K>{
+    class MyHeap<K>{
         private Node<K> head;
         private Node<K> last;
         private long size;
