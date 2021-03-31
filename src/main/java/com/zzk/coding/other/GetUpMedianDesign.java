@@ -32,7 +32,7 @@ public class GetUpMedianDesign {
 
     public int findKthNum(int[] arr1, int[] arr2, int kth){
         if(arr1 == null || arr2 == null){
-            throw new RuntimeException();
+            throw   new RuntimeException();
         }
         if(kth < 1 || kth > arr1.length + arr2.length){
             throw new RuntimeException();

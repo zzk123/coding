@@ -18,6 +18,12 @@ public class ManacherDsign {
         return res;
     }
 
+    /**
+     * 返回最长回文字符串的长度
+     * 时间复杂度为O(N)
+     * @param str
+     * @return
+     */
     public int maxLcpsLength(String str){
         if(str == null || str.length() == 0){
             return 0;
@@ -28,7 +34,10 @@ public class ManacherDsign {
         int pR = -1;
         int max = Integer.MIN_VALUE;
         for(int i = 0; i != charArr.length; i++){
-            pArr[i] = pR > i ? Math.min(pArr[2 * index - 1], pR - i) : i;
+            //判断是否在右边界内
+            //如果是在边界内，要么是对应的对称点的值pArr[2 * index - 1]，要么是右边界-i得到的半径
+            pArr[i] = pR > i ? Math.min(pArr[2 * index - 1], pR - i) : 1;
+            //循环判断半径长度
             while(i + pArr[i] < charArr.length && i - pArr[i] > -1){
                 if(charArr[i + pArr[i]] == charArr[i - pArr[i]]){
                     pArr[i]++;
@@ -36,10 +45,12 @@ public class ManacherDsign {
                     break;
                 }
             }
+            //判断是否超过右边界。超过则更新右边界
             if(i + pArr[i] > pR){
                 pR = i + pArr[i];
                 index = i;
             }
+            //获得最大半径
             max = Math.max(max, pArr[i]);
         }
         return max-1;
