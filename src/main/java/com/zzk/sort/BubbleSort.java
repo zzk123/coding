@@ -36,4 +36,10 @@ public class BubbleSort extends BaseSort {
             }
         }
     }
+
+    public static void main(String[] args) {
+        Integer[] arr = {3,6,8,0,3,5,4,2,1};
+        sort(arr);
+        show(arr);
+    }
 }

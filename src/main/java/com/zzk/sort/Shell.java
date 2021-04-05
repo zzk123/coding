@@ -28,7 +28,15 @@ public class Shell extends BaseSort {
                     exch(arr, j, j-h);
                 }
             }
+            h = h / 3;
         }
+    }
+
+
+    public static void main(String[] args) {
+        Comparable[] arr = {5,8,9,2,1,0};
+        sort(arr);
+        show(arr);
     }
 
 }

@@ -30,12 +30,15 @@ public class CountSort extends BaseSort{
         for(int i = 0; i < arr.length; i++){
             countArr[arr[i]-min]++;
         }
+        show(countArr);
         //3.统计数组做变形，后面的元素等于前面元素之和（优化变形）
+        //countArr存储的值也相当于该元素在新数组中的索引值 -> newArr[countArr[i]] = i
         int sum = 0;
         for(int i = 0; i < countArr.length; i++){
             sum += countArr[i];
             countArr[i] = sum;
         }
+        show(countArr);
         //4.倒序遍历原始数组，从统计数组找到正确位置，输出到结果数组
         Integer[] sortedArr = new Integer[arr.length];
         for(int i = arr.length - 1; i >= 0; i--){
@@ -43,5 +46,11 @@ public class CountSort extends BaseSort{
             countArr[arr[i]-min]--;
         }
         return sortedArr;
+    }
+
+    public static void main(String[] args) {
+        Integer[] arr = {10,9,8,7,6,5,8,3,0};
+        arr = sort(arr);
+        show(arr);
     }
 }

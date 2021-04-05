@@ -41,6 +41,19 @@ public class BaseSort {
 		}
 		System.out.println();
 	}
+
+	/**
+	 * 打印数组
+	 * @param a
+	 */
+	public static void show(int[] a){
+		//单行中打印数组
+		for(int i=0; i<a.length; i++){
+			System.out.print(a[i] + " ");
+		}
+		System.out.println();
+	}
+
 	/**
 	 * 判断是否有序
 	 * @param a
