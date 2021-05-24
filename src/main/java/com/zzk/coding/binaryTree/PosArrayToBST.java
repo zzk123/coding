@@ -11,7 +11,7 @@ public class PosArrayToBST {
     /**
      * 节点定义
      */
-    public class Node{
+    static class Node{
 
         public int value;
 
@@ -30,7 +30,7 @@ public class PosArrayToBST {
      * @param arr
      * @return
      */
-    public boolean isPostArray(int[] arr){
+    public static boolean isPostArray(int[] arr){
         if(arr == null || arr.length == 0){
             return false;
         }
@@ -44,7 +44,7 @@ public class PosArrayToBST {
      * @param end
      * @return
      */
-    public boolean isPost(int[] arr, int start, int end){
+    public static boolean isPost(int[] arr, int start, int end){
         if(start == end){
             return true;
         }
@@ -73,7 +73,7 @@ public class PosArrayToBST {
      * @param end
      * @return
      */
-    public Node posToBST(int[] posArr, int start, int end){
+    public static Node posToBST(int[] posArr, int start, int end){
         if(start > end){
             return null;
         }
@@ -90,5 +90,10 @@ public class PosArrayToBST {
         head.left = posToBST(posArr, start, less);
         head.right = posToBST(posArr, more, end-1);
         return head;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2,1,3,6,5,7,4};
+        isPostArray(arr);
     }
 }
