@@ -14,17 +14,26 @@ public class GetMaxTree {
     /**
      * 树节点
      */
-    public class Node{
+    public static class Node{
         public int value;
         public Node left;
         public Node right;
 
-        public Node(int data){
+        public Node(int value){
             this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
         }
     }
 
-    public Node getMaxTree(int[] arr){
+    public static Node getMaxTree(int[] arr){
         Node[] nArr = new Node[arr.length];
         for(int i = 0; i != arr.length; i++){
             nArr[i] = new Node(arr[i]);
@@ -57,6 +66,9 @@ public class GetMaxTree {
             popStackSetMap(stack, rBigMap);
         }
 
+        System.out.println(rBigMap.toString());
+        System.out.println(lBigMap.toString());
+
         Node head = null;
 
         for(int i = 0; i != nArr.length; i++){
@@ -71,6 +83,12 @@ public class GetMaxTree {
                 }else{
                     right.right = curNode;
                 }
+            }else if(right == null){
+                if(left.left == null){
+                    left.left = curNode;
+                }else{
+                    left.right = curNode;
+                }
             }else{
                 Node parent = left.value < right.value ? left : right;
                 if(parent.left == null){
@@ -83,12 +101,18 @@ public class GetMaxTree {
         return head;
     }
 
-    public void popStackSetMap(Stack<Node> stack, HashMap<Node, Node> map){
+    public static void popStackSetMap(Stack<Node> stack, HashMap<Node, Node> map){
         Node popNode = stack.pop();
         if(stack.isEmpty()){
             map.put(popNode, null);
         }else{
-            map.put(popNode, stack.pop());
+            map.put(popNode, stack.peek());
         }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3,4,5,1,2};
+        Node node = getMaxTree(arr);
+        System.out.println(node);
     }
 }

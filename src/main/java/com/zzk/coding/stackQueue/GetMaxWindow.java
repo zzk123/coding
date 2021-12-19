@@ -1,5 +1,6 @@
 package com.zzk.coding.stackQueue;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.LinkedList;
  */
 public class GetMaxWindow {
 
-    public int[] getMaxWindow(int [] arr, int w){
+    public static int[] getMaxWindow(int [] arr, int w){
         if( arr == null || w < 1 || arr.length < w){
             return null;
         }
@@ -19,10 +20,13 @@ public class GetMaxWindow {
         int [] res = new int[arr.length - w + 1];
         int index = 0;
         for(int i = 0; i < arr.length; i++){
+            //队列循环去掉最小值
             while(!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[i]){
                 qmax.pollLast();
             }
+            //队尾添加i
             qmax.addLast(i);
+            //判断是否队头过期
             if(qmax.peekFirst() == i-w){
                 qmax.pollFirst();
             }
@@ -32,5 +36,13 @@ public class GetMaxWindow {
             }
         }
         return res;
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr = {4,3,5,4,3,3,6,7};
+        int[] arr1 = {1,2,3,4,5,6,7,8};
+        int[] arr2 = {8,7,6,5,4,3,2,1};
+        Arrays.stream(getMaxWindow(arr2, 3)).forEach(System.out::println);
     }
 }
