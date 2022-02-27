@@ -1,4 +1,4 @@
-package com.zzk.concurrent.concurrentLinkedQueue;
+package com.zzk.concurrent.blockingQueue.concurrentLinkedQueue;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
