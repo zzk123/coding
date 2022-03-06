@@ -1,4 +1,4 @@
-package com.zzk.algorithm.labuladong;
+package com.zzk.algorithm.labuladong.Least;
 
 import java.util.HashMap;
 
