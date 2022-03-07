@@ -8,7 +8,7 @@ package com.zzk.algorithm.labuladong.dp;
  * @author: zzk
  * @create: 2022-03-06 23:43
  */
-public class DPDmoe2 {
+public class DPDemo2 {
 
     static class Node{
         int val;
