@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-04-13 22:35
  */
-public class Solution5 {
+public class Solution05 {
 
     public static int change(int amount, int[] coins){
         int[] dp = new int[amount+1];

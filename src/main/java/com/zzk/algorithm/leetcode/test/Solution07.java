@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-04-16 11:55
  */
-public class Solution7 {
+public class Solution07 {
 
     /**
      * 贪心算法，查找最左和最右，相减

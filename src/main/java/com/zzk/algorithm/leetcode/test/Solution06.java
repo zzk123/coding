@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-04-14 22:17
  */
-public class Solution6 {
+public class Solution06 {
 
     public static int rob(int[] nums){
         if(nums == null || nums.length == 0){

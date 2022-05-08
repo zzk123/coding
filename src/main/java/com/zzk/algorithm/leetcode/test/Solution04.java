@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-04-09 15:23
  */
-public class Solution4 {
+public class Solution04 {
 
     public static int maxCoins(int[] nums){
         int n = nums.length;

@@ -9,7 +9,7 @@ import java.util.Map;
  * @author: zzk
  * @create: 2022-03-29 22:55
  */
-public class Solution {
+public class Solution00 {
 
     public static int[] maxSlidingWindow(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();

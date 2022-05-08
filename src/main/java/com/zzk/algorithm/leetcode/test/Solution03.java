@@ -7,7 +7,7 @@ import java.util.*;
  * @author: zzk
  * @create: 2022-04-03 16:50
  */
-public class Solution3 {
+public class Solution03 {
 
     static class  Node {
         /**

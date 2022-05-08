@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-03-31 22:52
  */
-public class Solution2 {
+public class Solution02 {
 
     public static double findMedianSortedArrays(int[] A, int[] B) {
         int m = A.length;

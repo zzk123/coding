@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-04-20 23:31
  */
-public class Solution8 {
+public class Solution08 {
 
     /**
      *
