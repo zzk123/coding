@@ -6,7 +6,7 @@ package com.zzk.algorithm.leetcode.test;
  * @author: zzk
  * @create: 2022-05-08 14:47
  */
-public class Soultion11 {
+public class Solution11 {
 
     public static void moveZero(int[] nums){
         int length;

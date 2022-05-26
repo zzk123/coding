@@ -23,8 +23,9 @@ public class Solution12 {
             while (map.size() > 2){
                 map.put(tree[left], map.get(tree[left])-1);
                 if(map.get(tree[left]) == 0){
-                    left++;
+                    map.remove(tree[left]);
                 }
+                left++;
             }
             maxLen = Math.max(maxLen, i - left + 1);
         }
@@ -32,6 +33,7 @@ public class Solution12 {
     }
 
     public static void main(String[] args) {
-
+        int[] f = new int[]{3,3,3,1,2,1,1,1,2,3,3,3,4};
+        totalFruit(f);
     }
 }
