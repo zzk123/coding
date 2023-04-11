@@ -1,6 +1,5 @@
 package com.zzk.algorithm.carl.stack;
-
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 
 import java.util.*;
 
@@ -253,9 +252,155 @@ public class StackDemo {
         return str;
     }
 
-    public static void main(String[] args) {
-        List<Integer> nums = Arrays.asList(2,1,2,4,5);
-        System.out.println(JSONObject.toJSONString(nextGreaterElement(nums)));
-        System.out.println(JSONObject.toJSONString(dailyTemperatures(nums)));
+    /**
+     * 8、每日温度
+     * 给定一个整数数组 `temperatures` ，表示每天的温度，返回一个数组 `answer` ，其中 `answer[i]` 是指对于第 `i` 天，
+     * 下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 `0` 来代替。
+     *
+     * **示例 1:**
+     * 输入: temperatures = [73,74,75,71,69,72,76,73]
+     * 输出: [1,1,4,2,1,1,0,0]
+     */
+    /**
+     * 版本1 - 单调栈
+     */
+    public int[] dailyTemperatures(int[] temperatures){
+        int lens = temperatures.length;
+        int[] res = new int[lens];
+
+        Deque<Integer> stack = new LinkedList<>();
+        stack.push(0);
+        for(int i=1; i<lens; i++){
+            if(temperatures[i] <= temperatures[stack.peek()]){
+                stack.push(i);
+            }else{
+                while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]){
+                    res[stack.peek()] = i - stack.peek();
+                    stack.pop();
+                }
+                stack.push(i);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 版本2
+     */
+    public int[] dailyTemperatures2(int[] temperatures){
+        int lens = temperatures.length;
+        int[] res = new int[lens];
+        Deque<Integer> stack = new LinkedList<>();
+        for(int i=0; i<lens; i++){
+            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]){
+                res[stack.peek()] = i - stack.peek();
+                stack.pop();
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+
+    /**
+     * 9、下一个更大元素 I
+     * `nums1` 中数字 `x` 的 **下一个更大元素** 是指 `x` 在 `nums2` 中对应位置 **右侧** 的 **第一个** 比 `x` 大的元素。
+     * 给你两个 **没有重复元素** 的数组 `nums1` 和 `nums2` ，下标从 **0** 开始计数，其中`nums1` 是 `nums2` 的子集。
+     * 对于每个 `0 <= i < nums1.length` ，找出满足 `nums1[i] == nums2[j]` 的下标 `j` ，并且在 `nums2` 确定 `nums2[j]` 的 **下一个更大元素** 。如果不存在下一个更大元素，那么本次查询的答案是 `-1` 。
+     * 返回一个长度为 `nums1.length` 的数组 `ans` 作为答案，满足 `ans[i]` 是如上所述的 **下一个更大元素** 。
+     *
+     * 输入：nums1 = [4,1,2], nums2 = [1,3,4,2].
+     * 输出：[-1,3,-1]
+     * 解释：nums1 中每个值的下一个更大元素如下所述：
+     * - 4 ，用加粗斜体标识，nums2 = [1,3,4,2]。不存在下一个更大元素，所以答案是 -1 。
+     * - 1 ，用加粗斜体标识，nums2 = [1,3,4,2]。下一个更大元素是 3 。
+     * - 2 ，用加粗斜体标识，nums2 = [1,3,4,2]。不存在下一个更大元素，所以答案是 -1 。
+     */
+    public static int[] nextGreaterElement(int[] nums1, int[] nums2){
+        Stack<Integer> temp = new Stack<>();
+        int[] res = new int[nums1.length];
+        Arrays.fill(res, -1);
+        //使用map存储 nums1的元素信息
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        for(int i=0; i<nums1.length; i++){
+            hashMap.put(nums1[i], i);
+        }
+        temp.add(0);
+        //比较 nums2中的数据
+        for(int i=1; i<nums2.length; i++){
+            if(nums2[i] <= nums2[temp.peek()]){
+                temp.add(i);
+            }else{
+                //找到比头部大的元素。进行出栈处理
+                while(!temp.isEmpty() && nums2[temp.peek()] < nums2[i]){
+                    if(hashMap.containsKey(nums2[temp.peek()])){
+                        Integer index = hashMap.get(nums2[temp.peek()]);
+                        res[index] = nums2[i];
+                    }
+                    temp.pop();
+                }
+                temp.add(i);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 10、下一个更大元素 II
+     * 给定一个循环数组 `nums` （ `nums[nums.length - 1]` 的下一个元素是 `nums[0]` ），返回 *`nums` 中每个元素的 **下一个更大元素*** 。
+     * 数字 `x` 的 **下一个更大的元素** 是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 `-1` 。
+     *
+     * 输入: nums = [1,2,1]
+     * 输出: [2,-1,2]
+     * 解释: 第一个 1 的下一个更大的数是 2；
+     * 数字 2 找不到下一个更大的数；
+     * 第二个 1 的下一个最大的数需要循环搜索，结果也是 2。
+     */
+    public int[] nextGreaterElements(int[] nums){
+        if(nums == null || nums.length <= 1){
+            return new int[]{-1};
+        }
+        int size = nums.length;
+        int[] result = new int[size];
+        Arrays.fill(result, -1);
+        Stack<Integer> st = new Stack<>();
+        //模拟两个数组长度
+        for(int i=0; i<2*size; i++){
+            //每次判断i的下一个元素是否比栈顶大
+            while(!st.isEmpty() && nums[i%size] > nums[st.peek()]){
+                result[st.peek()] = nums[i%size];
+                st.pop();
+            }
+            st.push(i%size);
+        }
+        return result;
+    }
+
+    /**
+     * 11、接雨水
+     * 给定 `n` 个非负整数表示每个宽度为 `1` 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水
+     *
+     * 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+     * 输出：6
+     * 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+     */
+    public int trap(int[] height){
+        int ans = 0;
+        Deque<Integer> stack = new LinkedList<>();
+        int n = height.length;
+        for(int i=0; i<n; i++){
+            while(!stack.isEmpty() && height[i] > height[stack.peek()]){
+                int top = stack.pop();
+                if(stack.isEmpty()){
+                    break;
+                }
+                int left = stack.peek();
+                int currWidth = i - left - 1;
+                int currHeight = Math.min(height[left], height[i]) - height[top];
+
+                ans += currWidth * currHeight;
+            }
+            stack.push(i);
+        }
+        return ans;
     }
 }
