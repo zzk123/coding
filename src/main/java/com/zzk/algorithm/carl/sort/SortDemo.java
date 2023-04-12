@@ -2,6 +2,11 @@ package com.zzk.algorithm.carl.sort;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * 排序算法 - Demo
  */
@@ -303,7 +308,7 @@ public class SortDemo {
         //递归排序 a[mid+1....end]
         mergeSortUp2Down(a, mid+1, end);
         //合并
-        merge(a, start, mid, mid);
+        merge(a, start, mid, end);
     }
 
     /**
@@ -348,16 +353,213 @@ public class SortDemo {
             mergeGroups(a, a.length, n);
         }
     }
-
+    /**
+     * 对数组a做若干次合并：数组a的总长度为len，将它分为若干个长度为gap的子数组，将每2个相邻的子数组进行合并排序
+     **/
     public void mergeGroups(int[] a, int len, int gap){
-        int towlen = 2 * gap;
         int i;
+        //将每2个相邻的子数组进行合并
         for(i=0; i+2*gap-1<len; i+=(2*gap)){
             merge(a, i, i+gap-1, i+2*gap-1);
         }
-
+        //将该子数组合并到已排序的数组中
         if(i+gap-1 < len-1){
             merge(a, i, i+gap-1, len-1);
         }
+    }
+
+    /**
+     * 桶排序 - 稳定排序
+     *
+     * 平均时间复杂度：O(n+k)
+     * 最佳时间复杂度：O(n+k)
+     * 最差时间复杂度：O(n^2)
+     * 空间复杂度：O(n*k)
+     * k 是临时数组的大小
+     *
+     * 桶排序最好情况下使用线性时间O(n)，桶排序的时间复杂度。取决与对各个桶之间数据进行排序的时间复杂度。
+     * 因为其他部分的时间复杂度都为 O(n)。很显然，桶划分的越小，各个桶之间的数据越少，
+     * 排序所用的时间也会越少，但相应的空间消耗就会增大
+     */
+    public void bucketSort(int[] a, int max){
+        if(a == null || max < 1){
+            return;
+        }
+        int[] buckets = new int[max];
+        //1、计数
+        for(int i=0; i<a.length; i++){
+            buckets[a[i]]++;
+        }
+        //2、排序
+        for(int i=0, j=0; i<max; i++){
+            while((buckets[i]--) > 0){
+                a[j++] = i;
+            }
+        }
+
+        buckets = null;
+    }
+
+    /**
+     * 优化
+     * 时间复杂度：O(n+m+n(logn-logm))，m为桶数
+     * - 理想情况下，n=m，桶中元素均匀分布，可以达到 O(n)
+     * - 极端条件下，第一个桶有 n-1，第二桶有1个元素，时间复杂度退化为 O(nlogn)
+     * 空间复杂度：O(m+n)
+     */
+    public double[] bucketSort(double[] array){
+        //1、得到数列的最大值和最小值，算出差值 d
+        double max = array[0];
+        double min = array[0];
+        for(int i=1; i<array.length; i++){
+            if(array[i] > max){
+                max = array[i];
+            }
+            if(array[i] < min){
+                min = array[i];
+            }
+        }
+        double d = max - min;
+        //2、初始化桶
+        int bucketNum = array.length;
+        List<LinkedList<Double>> bucketList = new ArrayList<>(bucketNum);
+        for(int i=0; i<bucketNum; i++){
+            bucketList.add(new LinkedList<>());
+        }
+        //3、遍历原始数组，将每个元素放入桶中
+        for(int i=0; i<array.length; i++){
+            int num = (int)((array[i] - min) * (bucketNum-1)/d);
+            bucketList.get(num).add(array[i]);
+        }
+        //4、对每个桶内部进行排序
+        for(int i=0; i<bucketList.size(); i++){
+            Collections.sort(bucketList.get(i));
+        }
+        double[] sortedArray = new double[array.length];
+        int index = 0;
+        //5、输出所有元素
+        for(LinkedList<Double> list : bucketList){
+            for(double element : list){
+                sortedArray[index] = element;
+                index++;
+            }
+        }
+        return sortedArray;
+    }
+
+    /**
+     * 计数排序 - 稳定排序
+     * 时间复杂度：O(n+k)
+     * k为临时数组的大小
+     * 非原地排序
+     */
+    public int[] inPlaceSort(int[] arr){
+        if(arr == null || arr.length < 2){
+            return arr;
+        }
+        //查找最大值
+        int n = arr.length;
+        int max = arr[0];
+        for(int i=1; i<n; i++){
+            if(max < arr[i]){
+                max = arr[i];
+            }
+        }
+        //统计元素出现的次数
+        int[] temp = new int[max+1];
+        for(int i=0; i<n; i++){
+            temp[arr[i]]++;
+        }
+        int k = 0;
+        //把临时数组统计好的数组汇总
+        for(int i=0; i<=max; i++){
+            for(int j=temp[i]; j>0; j--){
+                arr[k++] = i;
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * 优化 - 根据 max和min的差值来确定数组
+     */
+    public int[] inPlaceSort2(int[] arr){
+        if(arr == null || arr.length < 2){
+            return arr;
+        }
+        int n = arr.length;
+        int min = arr[0];
+        int max = arr[0];
+        //查找最大值和最小值
+        for(int i=0; i<n; i++){
+            if(max < arr[i]){
+                max = arr[i];
+            }
+            if(min > arr[i]){
+                min = arr[i];
+            }
+        }
+        int d = max - min + 1;
+        int[] tmp = new int[d];
+        //统计出现次数
+        for(int i=0; i<n; i++){
+            tmp[arr[i]-min]++;
+        }
+
+        int k = 0;
+        //汇总回原来中的数组中
+        for(int i=0; i<d; i++){
+            for(int j=tmp[i]; j>0; j--){
+                arr[k++] = i+min;
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * 基数排序
+     */
+    public int[] radixSort(int[] arr){
+        if(arr == null || arr.length < 2){
+            return arr;
+        }
+        int n = arr.length;
+        int max = arr[0];
+        //找到最大值
+        for(int i=1; i<n; i++){
+            if(max < arr[i]){
+                max = arr[i];
+            }
+        }
+        //计算最大值是几位
+        int num = 1;
+        while(max/10 > 0){
+            num++;
+            max = max/2;
+        }
+        //初始化10个桶
+        List<LinkedList<Integer>> bucketList = new ArrayList<>(10);
+        for(int i=0; i<10; i++){
+            bucketList.add(new LinkedList<>());
+        }
+        //计算每一趟排序，从个位开始排
+        for(int i=1; i<=num; i++){
+            for(int j=0; j<n; j++){
+                //获取每个数最后第i位是哪个数组的
+                //arr[i]/(10^(i-1))%10
+                int radio = (arr[j]/(int) Math.pow(10, i-1) % 10);
+                bucketList.get(radio).add(arr[j]);
+            }
+            //合并返回原来的数组
+            int k = 0;
+            for(int j=1; j<10; j++){
+                for(Integer t : bucketList.get(j)){
+                    arr[k++] = t;
+                }
+                //取出来后清空数据
+                bucketList.get(j).clear();
+            }
+        }
+        return arr;
     }
 }
