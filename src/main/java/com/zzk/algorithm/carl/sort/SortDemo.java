@@ -19,7 +19,7 @@ public class SortDemo {
      * - 不稳定的排序算法： 两个相等的数排序前后位置顺序发生改变，比如a = b，排序前a在b的前面，排序后b在a的前面
      */
 
-    /**
+    /**···
      * 冒泡算法
      * 稳定算法
      * 时间复杂度：O(N^2)
@@ -105,7 +105,7 @@ public class SortDemo {
                 //将比a[i] 大的数据后移
                 int tmp = a[i];
                 int k;
-                for(k = i-1; k > j; j--){
+                for(k = i-1; k > j; k--){
                     a[k+1] = a[k];
                 }
                 //将a[i] 放到正确的位置
@@ -145,7 +145,7 @@ public class SortDemo {
     }
 
     /**
-     * 选择排序
+     * 选择排序 - 不稳定排序
      * 时间复杂度：O(N^2)
      */
     public void selectionSort(int[] a){
