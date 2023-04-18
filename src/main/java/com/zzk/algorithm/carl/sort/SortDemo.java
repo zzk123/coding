@@ -220,10 +220,11 @@ public class SortDemo {
             if(l < end && a[l] < a[l+1]){
                 l++;
             }
+            //比较父子节点
             if(tmp >= a[l]){
                 break;
             }
-            //交换
+            //交换最大的
             a[c] = a[l];
             a[l] = tmp;
         }
@@ -535,7 +536,7 @@ public class SortDemo {
         int num = 1;
         while(max/10 > 0){
             num++;
-            max = max/2;
+            max = max/10;
         }
         //初始化10个桶
         List<LinkedList<Integer>> bucketList = new ArrayList<>(10);
