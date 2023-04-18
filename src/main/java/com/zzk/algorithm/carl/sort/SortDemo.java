@@ -19,7 +19,7 @@ public class SortDemo {
      * - 不稳定的排序算法： 两个相等的数排序前后位置顺序发生改变，比如a = b，排序前a在b的前面，排序后b在a的前面
      */
 
-    /**
+    /**···
      * 冒泡算法
      * 稳定算法
      * 时间复杂度：O(N^2)
@@ -105,7 +105,7 @@ public class SortDemo {
                 //将比a[i] 大的数据后移
                 int tmp = a[i];
                 int k;
-                for(k = i-1; k > j; j--){
+                for(k = i-1; k > j; k--){
                     a[k+1] = a[k];
                 }
                 //将a[i] 放到正确的位置
@@ -145,7 +145,7 @@ public class SortDemo {
     }
 
     /**
-     * 选择排序
+     * 选择排序 - 不稳定排序
      * 时间复杂度：O(N^2)
      */
     public void selectionSort(int[] a){
@@ -220,10 +220,11 @@ public class SortDemo {
             if(l < end && a[l] < a[l+1]){
                 l++;
             }
+            //比较父子节点
             if(tmp >= a[l]){
                 break;
             }
-            //交换
+            //交换最大的
             a[c] = a[l];
             a[l] = tmp;
         }
@@ -535,7 +536,7 @@ public class SortDemo {
         int num = 1;
         while(max/10 > 0){
             num++;
-            max = max/2;
+            max = max/10;
         }
         //初始化10个桶
         List<LinkedList<Integer>> bucketList = new ArrayList<>(10);
